@@ -1,7 +1,6 @@
 package co.wawand.composetypesafenavigation.presentation.navigation
 
 import androidx.navigation.NavController
-import co.wawand.composetypesafenavigation.presentation.navigation.NavDestinations.HOME_ROUTE
 
 sealed class NavigationEvent {
     data object OnNavigateUp : NavigationEvent()
@@ -15,13 +14,11 @@ fun handleNavigationEvent(navController: NavController, event: NavigationEvent) 
         is NavigationEvent.OnNavigateUp -> navController::navigateUp
 
         is NavigationEvent.NavigateToHome -> {
-            navController.navigate(HOME_ROUTE) {
-                popUpTo(HOME_ROUTE) { inclusive = true }
-            }
+            navController.popBackStack(route = AppDestinations.Home, inclusive = true)
         }
 
         is NavigationEvent.OnNavigateToPostDetails -> {
-            navController.navigate(NavDestinations.postDetailsRoute(event.postId))
+            navController.navigate(AppDestinations.PostDetail(event.postId))
         }
     }
 }

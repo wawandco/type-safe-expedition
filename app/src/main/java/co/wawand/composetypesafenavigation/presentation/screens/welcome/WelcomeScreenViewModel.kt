@@ -64,10 +64,15 @@ class WelcomeScreenViewModel @Inject constructor(
                     }
 
                     is Resource.Success -> {
-                        result.data?.let {
-                            state = state.copy(
+                        state = if (result.data == true) {
+                            state.copy(
                                 isLoading = false,
                                 success = true
+                            )
+                        } else {
+                            state.copy(
+                                isLoading = false,
+                                error = UiText.DynamicString(result.message ?: GENERIC_ERROR)
                             )
                         }
                     }

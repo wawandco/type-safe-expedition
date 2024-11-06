@@ -22,7 +22,7 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            userPreferencesRepository.getUserId().collect { result ->
+            userPreferencesRepository.getUserId().let { result ->
                 when (result) {
                     is Resource.Loading -> {
                         _isLoggedIn.value = AppState.LOADING

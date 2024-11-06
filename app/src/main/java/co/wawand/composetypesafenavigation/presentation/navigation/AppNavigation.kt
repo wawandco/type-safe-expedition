@@ -5,10 +5,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import co.wawand.composetypesafenavigation.presentation.screens.details.post.PostDetailsScreen
 import co.wawand.composetypesafenavigation.presentation.screens.details.post.PostDetailsScreenViewModel
 import co.wawand.composetypesafenavigation.presentation.screens.home.HomeScreen
@@ -23,11 +22,11 @@ fun AppNavigation(navController: NavHostController, appState: AppState) {
 
     NavHost(navController = navController, startDestination = startDestination) {
 
-        composable(route = NavDestinations.LOADING_ROUTE) {
+        composable<AppDestinations.Loading> {
             ScreenLoading()
         }
 
-        composable(route = NavDestinations.WELCOME_ROUTE) {
+        composable<AppDestinations.Welcome> {
             val welcomeScreenViewModel = hiltViewModel<WelcomeScreenViewModel>()
             WelcomeScreen(
                 onNavigate = { event -> handleNavigationEvent(navController, event) },
@@ -36,7 +35,7 @@ fun AppNavigation(navController: NavHostController, appState: AppState) {
             )
         }
 
-        composable(route = NavDestinations.HOME_ROUTE) {
+        composable<AppDestinations.Home> {
             val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
             val state by homeScreenViewModel.uiState.collectAsState()
             HomeScreen(
@@ -46,19 +45,12 @@ fun AppNavigation(navController: NavHostController, appState: AppState) {
             )
         }
 
-        composable(
-            route = NavDestinations.POST_DETAILS_ROUTE,
-            arguments = listOf(
-                navArgument(NavArguments.POST_ID) {
-                    type = NavType.LongType
-                }
-            )
-        ) { navBackStackEntry ->
-            val postId = navBackStackEntry.arguments?.getLong(NavArguments.POST_ID) ?: 0L
+        composable<AppDestinations.PostDetail> { navBackStackEntry ->
+            val postDetail = navBackStackEntry.toRoute<AppDestinations.PostDetail>()
             val postDetailsScreenViewModel = hiltViewModel<PostDetailsScreenViewModel>()
             val state by postDetailsScreenViewModel.uiState.collectAsState()
             PostDetailsScreen(
-                postId = postId,
+                postId = postDetail.postId,
                 onNavigate = { event -> handleNavigationEvent(navController, event) },
                 onEvent = { event -> postDetailsScreenViewModel.onEvent(event) },
                 state = state
@@ -67,11 +59,11 @@ fun AppNavigation(navController: NavHostController, appState: AppState) {
     }
 }
 
-private fun resolveStartDestination(appState: AppState): String {
+private fun resolveStartDestination(appState: AppState): AppDestinations {
     return when (appState) {
-        AppState.LOADING -> NavDestinations.LOADING_ROUTE
-        AppState.IDLE -> NavDestinations.WELCOME_ROUTE
-        AppState.LOGGED_IN -> NavDestinations.HOME_ROUTE
+        AppState.LOADING -> AppDestinations.Loading
+        AppState.IDLE -> AppDestinations.Welcome
+        AppState.LOGGED_IN -> AppDestinations.Home
     }
 }
 

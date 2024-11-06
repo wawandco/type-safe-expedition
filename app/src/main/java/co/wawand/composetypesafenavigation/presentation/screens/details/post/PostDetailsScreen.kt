@@ -39,7 +39,7 @@ fun PostDetailsScreen(
     AppLayout(
         titleResId = R.string.details_post_screen_main_label,
         navigationConfiguration = NavigationConfiguration(
-            onClick = { onNavigate(NavigationEvent.NavigateToHome) },
+            onClick = { onNavigate(NavigationEvent.OnNavigateUp) },
             icon = Icons.AutoMirrored.Filled.ArrowBack
         )
     ) {

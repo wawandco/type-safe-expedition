@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.parcelize)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -66,6 +67,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     /* *****************************************************
+     **** Navigation compose
+     ****************************************************** */
+    implementation(libs.androidx.navigation.compose)
+
+    /* *****************************************************
      **** Lifecycle
      ****************************************************** */
     implementation(libs.androidx.lifecycle.extensions)
@@ -91,7 +97,6 @@ dependencies {
     /* *****************************************************
     **** Dependency-Hilt Injection
     ****************************************************** */
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
@@ -122,4 +127,9 @@ dependencies {
      **** Worker
     ****************************************************** */
     implementation(libs.androidx.work.runtime.ktx)
+
+    /* *****************************************************
+     **** Serialization
+    ****************************************************** */
+    implementation(libs.kotlinx.serialization.json)
 }

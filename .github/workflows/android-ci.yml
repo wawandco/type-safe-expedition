@@ -10,6 +10,9 @@ jobs:
   build:
     runs-on: macos-latest
 
+    env:
+      ANDROID_SDK_ROOT: ${{ runner.temp }}/android-sdk
+
     steps:
       - uses: actions/checkout@v3
 
@@ -19,20 +22,30 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Download Android SDK Command-Line Tools
+        run: |
+          mkdir -p $ANDROID_SDK_ROOT
+          curl -fo commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-mac-9477386_latest.zip
+          unzip -q commandlinetools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
+          mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
+        shell: bash
 
-      - name: Install Command Line Tools
-        run: yes | sdkmanager --install "cmdline-tools;latest" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Update PATH for Android tools
+        run: echo "$ANDROID_SDK_ROOT/cmdline-tools/latest:$ANDROID_SDK_ROOT/platform-tools" >> $GITHUB_PATH
 
       - name: Accept Licenses
-        run: yes | sdkmanager --licenses
+        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
 
       - name: Install Build and Platform Tools
-        run: sdkmanager --install "build-tools;35.0.0" "platform-tools" "platforms;android-35"
+        run: |
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "build-tools;35.0.0" "platform-tools" "platforms;android-35"
 
       - name: Install System Image for API Level 33
-        run: sdkmanager --install "system-images;android-33;google_apis;x86_64"
+        run: |
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "system-images;android-33;google_apis;x86_64"
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
       - name: Build with Gradle
         run: ./gradlew build

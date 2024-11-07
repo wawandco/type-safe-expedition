@@ -10,9 +10,9 @@ plugins {
 }
 
 allprojects {
-    extra["compileSDK"] = 34
+    extra["compileSDK"] = 35
     extra["minSDK"] = 30
-    extra["targetSDK"] = 34
+    extra["targetSDK"] = 35
     extra["javaVersion"] = JavaVersion.VERSION_17
     extra["kotlinJvmTarget"] = "17"
 }

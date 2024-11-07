@@ -14,8 +14,15 @@ import co.wawand.composetypesafenavigation.data.local.database.entity.PostEntity
 import co.wawand.composetypesafenavigation.data.local.database.entity.UserEntity
 
 @Database(
-    entities = [UserEntity::class, AuthorEntity::class, PostEntity::class, AlbumEntity::class, PhotoEntity::class],
-    version = 1
+    entities = [
+        UserEntity::class,
+        AuthorEntity::class,
+        PostEntity::class,
+        AlbumEntity::class,
+        PhotoEntity::class
+    ],
+    version = 1,
+    exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {
 

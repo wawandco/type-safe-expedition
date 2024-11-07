@@ -1,13 +1,20 @@
 [versions]
-agp = "8.7.1"
+agp = "8.7.2"
 kotlin = "2.0.0"
-coreKtx = "1.13.1"
+coreVersion = "1.15.0"
+
+# Test
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.6"
+archCoreTesting = "2.2.0"
+coreTesting = "1.6.1"
+runnerVersion = "1.6.2"
+robolectric = "4.11.1"
+
+lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
-composeBom = "2024.10.00"
+composeBom = "2024.10.01"
 
 # Navigation Compose
 navigationCompose = "2.8.3"
@@ -21,8 +28,8 @@ hiltCompose = "1.2.0"
 activityKtx = "1.9.3"
 
 #Lifecycle
-lifecycleVersion = "2.8.6"
-runtimeLivedata = "1.7.4"
+lifecycleVersion = "2.8.7"
+runtimeLivedata = "1.7.5"
 lifecycleExtensions = "2.2.0"
 
 #Retrofit2
@@ -41,7 +48,7 @@ coreSplashscreen = "1.0.1"
 #Data Store
 datastorePreferences = "1.1.1"
 
-workRuntimeKtx = "2.9.1"
+workRuntimeKtx = "2.10.0"
 
 #KSP
 ksp = "2.0.20-1.0.25"
@@ -50,16 +57,25 @@ ksp = "2.0.20-1.0.25"
 kapt = "1.8.0"
 
 #Google Fonts
-composeGoogleFonts = "1.7.4"
+composeGoogleFonts = "1.7.5"
 
 # Kotlin Serialization Json
 kotlinSerialization = "1.6.3"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "coreVersion" }
+androidx-coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "coreVersion" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+junitKtx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitVersion" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "archCoreTesting" }
+androidx-test-corektx = { group = "androidx.test", name = "core-ktx", version.ref = "coreVersion" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "coreTesting" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "runnerVersion" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -103,6 +119,7 @@ converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", 
 #Coroutines
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 
 #Room Database
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -134,3 +151,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt" }
 
+[bundles]
+testing = ["junit", "junitKtx", "kotlinx-coroutines-test", "robolectric"]

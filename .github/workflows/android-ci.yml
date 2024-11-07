@@ -11,7 +11,7 @@ jobs:
     runs-on: macos-latest
 
     env:
-      ANDROID_SDK_ROOT: ${{ runner.temp }}/android-sdk
+      ANDROID_SDK_ROOT: $HOME/android-sdk
 
     steps:
       - uses: actions/checkout@v3

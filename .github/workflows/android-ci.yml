@@ -23,6 +23,15 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Accept Licences
+        run: yes | sdkmanager --licenses
+
+      - name: Install Build and Platform Tools
+        run: sdkmanager --install "build-tools;35.0.0" "platform-tools" "platforms;android-35"
+
+      - name: Install System Image for API Level 33
+        run: sdkmanager --install "system-images;android-33;google_apis;x86_64"
+
       - name: Build with Gradle
         run: ./gradlew build
 
@@ -32,5 +41,9 @@ jobs:
       - name: Run Instrumented Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 35
+          api-level: 33
+          target: google_apis
+          arch: x86_64
           script: ./gradlew connectedCheck
+          emulator-boot-timeout: 600
+          disable-animations: true

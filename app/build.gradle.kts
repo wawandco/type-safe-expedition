@@ -48,8 +48,8 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.coreKtx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -58,11 +58,46 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
+
+    //testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
+    //androidTestImplementation(libs.junitKtx)
+    //testImplementation(libs.junitKtx)
+
+    testImplementation(libs.androidx.arch.core.testing)
+    androidTestImplementation(libs.androidx.arch.core.testing)
+
+    androidTestImplementation(libs.androidx.test.corektx) {
+        version {
+            strictly("1.5.0")
+        }
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-common")
+    }
+    testImplementation(libs.androidx.test.corektx) {
+        version {
+            strictly("1.5.0")
+        }
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-common")
+    }
+
+    androidTestImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.test.core)
+
+    //androidTestImplementation(libs.kotlinx.coroutines.test)
+    //testImplementation(libs.kotlinx.coroutines.test)
+
+    testImplementation(libs.bundles.testing)
+    androidTestImplementation(libs.bundles.testing)
+
+    androidTestImplementation(libs.androidx.test.runner)
+    testImplementation(libs.androidx.test.runner)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 

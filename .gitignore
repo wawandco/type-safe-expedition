@@ -11,6 +11,9 @@
 # Java class files
 *.class
 
+# Firebase
+app/google-services.json
+
 # generated files
 bin/
 gen/

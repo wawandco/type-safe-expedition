@@ -62,6 +62,10 @@ composeGoogleFonts = "1.7.5"
 # Kotlin Serialization Json
 kotlinSerialization = "1.6.3"
 
+#Firebase configuration
+googleServicesPlugin = "4.4.2"
+firebaseAnalytics = "22.1.2"
+
 [libraries]
 androidx-core = { group = "androidx.core", name = "core", version.ref = "coreVersion" }
 androidx-coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "coreVersion" }
@@ -140,6 +144,9 @@ androidx-compose-ui-google-fonts = { group = "androidx.compose.ui", name = "ui-t
 # Kotlin Serialization Json
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 
+# Firebase
+com-google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -150,6 +157,8 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt" }
+
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServicesPlugin" }
 
 [bundles]
 testing = ["junit", "junitKtx", "kotlinx-coroutines-test", "robolectric"]

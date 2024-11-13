@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.parcelize)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -59,14 +60,10 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    //testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-
-    //androidTestImplementation(libs.junitKtx)
-    //testImplementation(libs.junitKtx)
 
     testImplementation(libs.androidx.arch.core.testing)
     androidTestImplementation(libs.androidx.arch.core.testing)
@@ -88,9 +85,6 @@ dependencies {
 
     androidTestImplementation(libs.androidx.test.core)
     testImplementation(libs.androidx.test.core)
-
-    //androidTestImplementation(libs.kotlinx.coroutines.test)
-    //testImplementation(libs.kotlinx.coroutines.test)
 
     testImplementation(libs.bundles.testing)
     androidTestImplementation(libs.bundles.testing)
@@ -167,4 +161,9 @@ dependencies {
      **** Serialization
     ****************************************************** */
     implementation(libs.kotlinx.serialization.json)
+
+    /* *****************************************************
+     **** Firebase
+    ****************************************************** */
+    implementation(libs.com.google.firebase.analytics)
 }

@@ -18,7 +18,12 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'temurin'
+
+      - name: Load Google Service file
+        run: |
+          echo "my google service secret is: ${{ secrets.GOOGLE_SERVICES_JSON }}"
+          echo ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > app/google-services.json
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew

@@ -14,4 +14,7 @@ sealed class AppDestinations {
 
     @Serializable
     data class PostDetail(val postId: Long) : AppDestinations()
+
+    @Serializable
+    data class AlbumDetails(val albumId: Long) : AppDestinations()
 }

@@ -152,7 +152,8 @@ com-google-firebase-analytics = { group = "com.google.firebase", name = "firebas
 
 # Coil
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
-coil-network-okhttp = {group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil"}
+coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
+coil-test = { group = "io.coil-kt.coil3", name = "coil-test", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

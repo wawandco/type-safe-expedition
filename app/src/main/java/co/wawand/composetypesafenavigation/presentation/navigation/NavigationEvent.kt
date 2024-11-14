@@ -6,6 +6,7 @@ sealed class NavigationEvent {
     data object OnNavigateUp : NavigationEvent()
     data object NavigateToHome : NavigationEvent()
     data class OnNavigateToPostDetails(val postId: Long) : NavigationEvent()
+    data class OnNavigateToAlbumDetails(val albumId: Long) : NavigationEvent()
 }
 
 fun handleNavigationEvent(navController: NavHostController, event: NavigationEvent) {
@@ -18,9 +19,11 @@ fun handleNavigationEvent(navController: NavHostController, event: NavigationEve
         }
 
         is NavigationEvent.OnNavigateToPostDetails -> navController.navigate(
-            AppDestinations.PostDetail(
-                event.postId
-            )
+            AppDestinations.PostDetail(event.postId)
+        )
+
+        is NavigationEvent.OnNavigateToAlbumDetails -> navController.navigate(
+            AppDestinations.AlbumDetails(event.albumId)
         )
     }
 }

@@ -66,6 +66,9 @@ kotlinSerialization = "1.6.3"
 googleServicesPlugin = "4.4.2"
 firebaseAnalytics = "22.1.2"
 
+#Coil
+coil = "3.0.2"
+
 [libraries]
 androidx-core = { group = "androidx.core", name = "core", version.ref = "coreVersion" }
 androidx-coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "coreVersion" }
@@ -146,6 +149,10 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 
 # Firebase
 com-google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
+
+# Coil
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-okhttp = {group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

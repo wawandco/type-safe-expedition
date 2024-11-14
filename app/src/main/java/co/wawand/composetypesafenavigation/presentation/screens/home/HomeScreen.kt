@@ -59,7 +59,12 @@ fun HomeScreen(
                     }
                 )
 
-                HomeSection.ALBUMS -> AlbumList(state.albums ?: emptyList())
+                HomeSection.ALBUMS -> AlbumList(
+                    albumList = state.albums ?: emptyList(),
+                    onAlbumClick = { albumId ->
+                        onNavigate(NavigationEvent.OnNavigateToAlbumDetails(albumId))
+                    }
+                )
 
                 HomeSection.AUTHORS -> AuthorList(state.authors ?: emptyList())
             }

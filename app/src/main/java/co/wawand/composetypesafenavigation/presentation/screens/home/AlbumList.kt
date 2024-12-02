@@ -28,7 +28,10 @@ import co.wawand.composetypesafenavigation.core.extension.truncate
 import co.wawand.composetypesafenavigation.domain.model.Album
 
 @Composable
-fun AlbumList(albumList: List<Album>) {
+fun AlbumList(
+    albumList: List<Album>,
+    onAlbumClick: (Long) -> Unit = {},
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,7 +65,7 @@ fun AlbumList(albumList: List<Album>) {
                             .padding(12.dp)
                             .height(120.dp)
                             .fillMaxWidth()
-                            .clickable { },
+                            .clickable { onAlbumClick(albumList[index].id) },
                     ) {
                         Column(
                             modifier = Modifier

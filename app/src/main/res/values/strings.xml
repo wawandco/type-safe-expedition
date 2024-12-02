@@ -28,5 +28,14 @@
     <string name="details_post_screen_main_label">Post Details</string>
     <string name="details_post_screen_related_posts_label">Related Posts</string>
 
+    <!--Album-->
+    <string name="details_album_screen_main_label">Album Details</string>
+    <string name="details_album_screen_album_label">Album:</string>
+    <string name="details_album_screen_padding_label">padding</string>
+    <string name="details_album_screen_corner_label">corner</string>
+    <string name="details_album_screen_unable_load_photo">Unable to load photo</string>
+    <string name="details_album_screen_content_key">photo</string>
+
+    <string name="dismiss_label">Dismiss</string>
     <string name="generic_error">Something went wrong</string>
 </resources>

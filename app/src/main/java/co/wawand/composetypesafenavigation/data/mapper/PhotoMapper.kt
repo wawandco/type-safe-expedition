@@ -5,12 +5,23 @@ import co.wawand.composetypesafenavigation.data.local.database.entity.PhotoWithA
 import co.wawand.composetypesafenavigation.data.remote.api.entity.PhotoAPIEntity
 import co.wawand.composetypesafenavigation.domain.model.Photo
 
-fun PhotoAPIEntity.toDBEntity(): PhotoEntity = PhotoEntity(
+fun PhotoAPIEntity.toDBEntity(): PhotoEntity {
+    val randomNumber = (0..100000).random()
+    return PhotoEntity(
+        id = id,
+        title = title,
+        thumbnailUrl = "https://picsum.photos/seed/$randomNumber/256/256",
+        url = "https://picsum.photos/seed/$randomNumber/2400/1600",
+        albumId = albumId
+    )
+}
+
+fun PhotoEntity.toDomain(): Photo = Photo(
     id = id,
     title = title,
     thumbnailUrl = thumbnailUrl,
     url = url,
-    albumId = albumId
+    album = albumId.toString()
 )
 
 fun PhotoWithAlbum.toDomain(): Photo {

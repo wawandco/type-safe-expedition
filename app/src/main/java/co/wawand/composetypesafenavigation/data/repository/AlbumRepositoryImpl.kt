@@ -1,15 +1,18 @@
 package co.wawand.composetypesafenavigation.data.repository
 
 import android.util.Log
+import co.wawand.composetypesafenavigation.core.Constant.GENERIC_ERROR
 import co.wawand.composetypesafenavigation.core.util.Resource
 import co.wawand.composetypesafenavigation.data.local.database.dao.AlbumDao
 import co.wawand.composetypesafenavigation.data.local.database.dao.PhotoDao
+import co.wawand.composetypesafenavigation.data.mapper.toAlbumWithPhotosDomain
 import co.wawand.composetypesafenavigation.data.mapper.toDBEntity
 import co.wawand.composetypesafenavigation.data.mapper.toDomain
 import co.wawand.composetypesafenavigation.data.remote.api.AlbumAPIService
 import co.wawand.composetypesafenavigation.data.remote.api.entity.AlbumAPIEntity
 import co.wawand.composetypesafenavigation.data.remote.api.entity.PhotoAPIEntity
 import co.wawand.composetypesafenavigation.domain.model.Album
+import co.wawand.composetypesafenavigation.domain.model.AlbumWithPhotos
 import co.wawand.composetypesafenavigation.domain.repository.AlbumRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -59,7 +62,6 @@ class AlbumRepositoryImpl @Inject constructor(
                     } ?: emit(Resource.Success(true))
                 }
             } else {
-                Log.d("AlbumRepositoryImpl", "remote photos response fail: ${response.body()}")
                 emit(Resource.Success(false))
             }
         }
@@ -92,6 +94,20 @@ class AlbumRepositoryImpl @Inject constructor(
             emit(Resource.Success(it))
         }
     }
+
+    override suspend fun getAlbumDetailsWithPhotos(id: Long): Flow<Resource<AlbumWithPhotos>> =
+        flow {
+            emit(Resource.Loading())
+
+            runCatching {
+                albumDao.getAlbumById(id).toAlbumWithPhotosDomain()
+            }.onFailure {
+                it.printStackTrace()
+                emit(Resource.Error(it.message ?: GENERIC_ERROR))
+            }.onSuccess {
+                emit(Resource.Success(it))
+            }
+        }
 
     private suspend fun saveAlbums(remoteAlbums: List<AlbumAPIEntity>): String? {
         return try {

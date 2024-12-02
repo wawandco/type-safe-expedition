@@ -9,3 +9,11 @@ data class Album(
     val owner: Author?,
     val photos: Int,
 )
+
+@Immutable
+data class AlbumWithPhotos(
+    val id: Long,
+    val title: String,
+    val owner: Author?,
+    val photos: List<Photo>,
+)

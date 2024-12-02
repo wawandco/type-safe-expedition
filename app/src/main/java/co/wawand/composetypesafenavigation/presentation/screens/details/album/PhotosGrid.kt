@@ -67,33 +67,41 @@ fun PhotosGrid(
     onPhotoClicked: (Photo) -> Unit = {}
 ) {
     val inSelectionMode by remember { derivedStateOf { selectedIds.value.isNotEmpty() } }
-    val state = rememberLazyGridState()
+    val lazyGridState = rememberLazyGridState()
     val autoScrollSpeed = remember { mutableFloatStateOf(0f) }
 
     LaunchedEffect(autoScrollSpeed.floatValue) {
         if (autoScrollSpeed.floatValue != 0f) {
             while (isActive) {
-                state.scrollBy(autoScrollSpeed.floatValue)
+                lazyGridState.scrollBy(autoScrollSpeed.floatValue)
                 delay(10)
             }
         }
     }
 
     LazyVerticalGrid(
-        state = state,
+        state = lazyGridState,
         columns = GridCells.Adaptive(minSize = 128.dp),
         verticalArrangement = Arrangement.spacedBy(3.dp),
         horizontalArrangement = Arrangement.spacedBy(3.dp),
-        modifier = Modifier.photoGridDragHandler(
-            lazyGridState = state,
-            haptics = LocalHapticFeedback.current,
-            selectedIds = selectedIds,
-            autoScrollSpeed = autoScrollSpeed,
-            autoScrollThreshold = with(LocalDensity.current) { 40.dp.toPx() }
-        )
+        modifier = Modifier
+            .photoGridDragHandler(
+                lazyGridState = lazyGridState,
+                haptics = LocalHapticFeedback.current,
+                selectedIds = selectedIds,
+                autoScrollSpeed = autoScrollSpeed,
+                autoScrollThreshold = with(LocalDensity.current) { 40.dp.toPx() }
+            )
     ) {
-        items(items = photos, key = { it.id }) { photo ->
-            val selected by remember { derivedStateOf { selectedIds.value.contains(photo.id) } }
+        items(
+            items = photos,
+            key = { it.id }
+        ) { photo ->
+
+            val selected by remember {
+                derivedStateOf { selectedIds.value.contains(photo.id) }
+            }
+
             ImageItem(
                 photo = photo,
                 inSelectionMode = inSelectionMode,
@@ -108,21 +116,22 @@ fun PhotosGrid(
                         }
                     }
                     .clickable(onClick = { onPhotoClicked(photo) })
-                    .then(if (inSelectionMode) {
-                        Modifier
-                            .toggleable(
-                                value = selected,
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = null, // do not show a ripple
-                                onValueChange = {
-                                    if (it) {
-                                        selectedIds.value += photo.id
-                                    } else {
-                                        selectedIds.value -= photo.id
+                    .then(
+                        if (inSelectionMode) {
+                            Modifier
+                                .toggleable(
+                                    value = selected,
+                                    interactionSource = remember { MutableInteractionSource() },
+                                    indication = null, // do not show a ripple
+                                    onValueChange = {
+                                        if (it) {
+                                            selectedIds.value += photo.id
+                                        } else {
+                                            selectedIds.value -= photo.id
+                                        }
                                     }
-                                }
-                            )
-                    } else Modifier
+                                )
+                        } else Modifier
                     )
             )
         }

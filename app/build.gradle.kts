@@ -166,4 +166,11 @@ dependencies {
      **** Firebase
     ****************************************************** */
     implementation(libs.com.google.firebase.analytics)
+
+    /* *****************************************************
+     **** Coil
+    ****************************************************** */
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.coil.test)
 }

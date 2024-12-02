@@ -8,6 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import co.wawand.composetypesafenavigation.presentation.screens.details.album.AlbumDetailsScreen
+import co.wawand.composetypesafenavigation.presentation.screens.details.album.AlbumDetailsScreenViewModel
 import co.wawand.composetypesafenavigation.presentation.screens.details.post.PostDetailsScreen
 import co.wawand.composetypesafenavigation.presentation.screens.details.post.PostDetailsScreenViewModel
 import co.wawand.composetypesafenavigation.presentation.screens.home.HomeScreen
@@ -53,6 +55,18 @@ fun AppNavigation(navController: NavHostController, appState: AppState) {
                 postId = postDetail.postId,
                 onNavigate = { event -> handleNavigationEvent(navController, event) },
                 onEvent = { event -> postDetailsScreenViewModel.onEvent(event) },
+                state = state
+            )
+        }
+
+        composable<AppDestinations.AlbumDetails> { navBackStackEntry ->
+            val albumDetail = navBackStackEntry.toRoute<AppDestinations.AlbumDetails>()
+            val albumDetailsScreenViewModel = hiltViewModel<AlbumDetailsScreenViewModel>()
+            val state by albumDetailsScreenViewModel.uiState.collectAsState()
+            AlbumDetailsScreen(
+                albumId = albumDetail.albumId,
+                onNavigate = { event -> handleNavigationEvent(navController, event) },
+                onEvent = { event -> albumDetailsScreenViewModel.onEvent(event) },
                 state = state
             )
         }

@@ -181,4 +181,4 @@ google-services = { id = "com.google.gms.google-services", version.ref = "google
 secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 
 [bundles]
-testing = ["junit", "junitKtx", "kotlinx-coroutines-test", "robolectric", "mockito-kotlin", "mockwebserver"]
+testing = ["junit", "junitKtx", "kotlinx-coroutines-test", "robolectric", "mockito-kotlin"]

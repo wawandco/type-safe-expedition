@@ -18,9 +18,13 @@ fun Modifier.photoGridDragHandler(
     autoScrollSpeed: MutableState<Float>,
     autoScrollThreshold: Float
 ) = pointerInput(Unit) {
+
     fun LazyGridState.gridItemKeyAtPosition(hitPoint: Offset): Long? =
         layoutInfo.visibleItemsInfo.find { itemInfo ->
-            itemInfo.size.toIntRect().contains(hitPoint.round() - itemInfo.offset)
+            itemInfo
+                .size
+                .toIntRect()
+                .contains(hitPoint.round() - itemInfo.offset)
         }?.key as? Long
 
     var initialKey: Long? = null
@@ -44,8 +48,10 @@ fun Modifier.photoGridDragHandler(
                     lazyGridState.layoutInfo.viewportSize.height - change.position.y
                 val distFromTop = change.position.y
                 autoScrollSpeed.value = when {
-                    distFromBottom < autoScrollThreshold -> autoScrollThreshold - distFromBottom
-                    distFromTop < autoScrollThreshold -> -(autoScrollThreshold - distFromTop)
+                    distFromBottom < autoScrollThreshold ->
+                        autoScrollThreshold - distFromBottom
+                    distFromTop < autoScrollThreshold ->
+                        -(autoScrollThreshold - distFromTop)
                     else -> 0f
                 }
 

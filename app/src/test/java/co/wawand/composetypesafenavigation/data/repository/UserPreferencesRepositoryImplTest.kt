@@ -1,5 +1,6 @@
 package co.wawand.composetypesafenavigation.data.repository
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -12,6 +13,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -21,6 +23,10 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 @RunWith(MockitoJUnitRunner::class)
 class UserPreferencesRepositoryImplTest {
+    
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
     @Mock
     private lateinit var mockDataStore: DataStore<Preferences>
     private lateinit var repository: UserPreferencesRepositoryImpl

@@ -61,7 +61,7 @@ class AuthorRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    private suspend fun saveAuthors(remoteAuthors: List<AuthorAPIEntity>): String? {
+    private fun saveAuthors(remoteAuthors: List<AuthorAPIEntity>): String? {
         return try {
             authorDao.insertAuthors(remoteAuthors.map { it.toDBEntity() })
             null

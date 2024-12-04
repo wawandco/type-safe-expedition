@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.parcelize)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.google.services)
 }
@@ -128,7 +127,7 @@ dependencies {
     ****************************************************** */
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.work)
 
     /* *****************************************************

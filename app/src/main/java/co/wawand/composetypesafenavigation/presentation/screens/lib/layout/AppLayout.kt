@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -84,17 +83,6 @@ fun AppLayout(
     }
 }
 
-@Composable
-private fun DefaultTopAppBarNavigationIcon(onClick: () -> Unit) {
-    IconButton(onClick = onClick) {
-        Icon(
-            imageVector = Icons.Default.Menu,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimary
-        )
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DefaultTopBar(
@@ -137,13 +125,6 @@ private fun DefaultTopBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun TopAppBarPreview() {
-    DefaultTopBar(
-        modifier = Modifier,
-        navigationIcon = { DefaultTopAppBarNavigationIcon {} },
-        action = {},
-        iconVector = Icons.Filled.Settings,
-        titleResId = R.string.home_screen_unknown_label,
-        scrollBehaviour = null
-    )
+fun AppLayoutPreview() {
+    AppLayout {}
 }

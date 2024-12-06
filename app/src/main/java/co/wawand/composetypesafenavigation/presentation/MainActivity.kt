@@ -13,6 +13,7 @@ import co.wawand.composetypesafenavigation.presentation.navigation.AppNavigation
 import co.wawand.composetypesafenavigation.presentation.navigation.AppState
 import co.wawand.composetypesafenavigation.presentation.navigation.MainViewModel
 import co.wawand.composetypesafenavigation.presentation.theme.ComposeTypeSafeNavigationTheme
+import com.google.android.gms.maps.MapsInitializer
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MapsInitializer.initialize(applicationContext)
         enableEdgeToEdge()
 
         installSplashScreen()

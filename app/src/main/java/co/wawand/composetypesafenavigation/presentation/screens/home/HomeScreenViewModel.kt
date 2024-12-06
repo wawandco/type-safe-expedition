@@ -80,6 +80,12 @@ class HomeScreenViewModel @Inject constructor(
                 }
                 getLocalAuthors()
             }
+
+            HomeSection.MAP -> viewModelState.update {
+                it.copy(
+                    currentSection = HomeSection.MAP
+                )
+            }
         }
     }
 

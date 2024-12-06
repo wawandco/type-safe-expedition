@@ -23,7 +23,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 @RunWith(MockitoJUnitRunner::class)
 class UserPreferencesRepositoryImplTest {
-    
+
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 

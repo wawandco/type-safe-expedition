@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.maps.compose)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.compose.ui.google.fonts)
     implementation(libs.androidx.ui.graphics)

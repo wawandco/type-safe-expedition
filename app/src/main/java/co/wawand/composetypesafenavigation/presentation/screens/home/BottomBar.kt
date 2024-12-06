@@ -63,5 +63,9 @@ enum class HomeSection(val text: UiText, @DrawableRes val resId: Int) {
     AUTHORS(
         text = UiText.StringResource(resId = R.string.home_screen_authors_label),
         resId = R.drawable.user_group
+    ),
+    MAP(
+        text = UiText.StringResource(resId = R.string.home_screen_map_label),
+        resId = R.drawable.map
     )
 }

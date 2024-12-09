@@ -34,6 +34,7 @@ fun HomeScreen(
                     HomeSection.POSTS -> onEvent(HomeScreenEvents.OnRefreshPosts)
                     HomeSection.ALBUMS -> onEvent(HomeScreenEvents.OnRefreshAlbums)
                     HomeSection.AUTHORS -> onEvent(HomeScreenEvents.OnRefreshAuthors)
+                    HomeSection.MAP -> {}
                 }
             }) {
                 Icon(
@@ -67,6 +68,7 @@ fun HomeScreen(
                 )
 
                 HomeSection.AUTHORS -> AuthorList(state.authors ?: emptyList())
+                HomeSection.MAP -> Map()
             }
         }
 

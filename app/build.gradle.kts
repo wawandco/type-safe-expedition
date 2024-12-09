@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.parcelize)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.secrets.gradle.plugin)
 }
 
 android {
@@ -44,6 +45,14 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+
+    secrets {
+        // This production secrets file and going to contains real secrets
+        propertiesFileName = "secrets.properties"
+
+        defaultPropertiesFileName = "local.properties"
     }
 }
 
@@ -173,4 +182,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
     implementation(libs.coil.test)
+
+    /* *****************************************************
+     **** Maps SDK
+    ****************************************************** */
+    implementation(libs.play.services.map)
 }

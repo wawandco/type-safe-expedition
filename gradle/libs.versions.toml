@@ -18,6 +18,9 @@ activityCompose = "1.9.3"
 composeBom = "2024.11.00"
 mapsCompose = "6.2.1"
 
+# Maps SDK
+playServicesMap = "19.0.0"
+
 # Navigation Compose
 navigationCompose = "2.8.4"
 
@@ -67,6 +70,9 @@ firebaseAnalytics = "22.1.2"
 
 #Coil
 coil = "3.0.3"
+
+# Secrets Gradle Plugin
+secretsGradlePlugin = "2.0.1"
 
 [libraries]
 androidx-core = { group = "androidx.core", name = "core", version.ref = "coreVersion" }
@@ -157,6 +163,9 @@ coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref 
 coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 coil-test = { group = "io.coil-kt.coil3", name = "coil-test", version.ref = "coil" }
 
+# Maps SDK
+play-services-map = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMap" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -168,6 +177,8 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServicesPlugin" }
+
+secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 
 [bundles]
 testing = ["junit", "junitKtx", "kotlinx-coroutines-test", "robolectric", "mockito-kotlin", "mockwebserver"]

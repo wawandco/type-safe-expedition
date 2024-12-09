@@ -17,13 +17,9 @@
         android:theme="@style/Theme.ComposeTypeSafeNavigation"
         tools:targetApi="31">
 
-        <!--<meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCwllFEmHtKqFsoS7wdvUN7LZiRVtE7rn4" />-->
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBDH3Ctu1Zmh5GkI1rc3UwHEDYlCI7VZa0" />
+            android:value="${mapApiKey}" />
 
         <activity
             android:name=".presentation.SplashActivity"

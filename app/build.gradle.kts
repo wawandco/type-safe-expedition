@@ -49,7 +49,10 @@ android {
     }
 
     secrets {
-        defaultPropertiesFileName = "secrets.properties"
+        // This production secrets file and going to contains real secrets
+        propertiesFileName = "secrets.properties"
+        defaultPropertiesFileName = "local.properties"
+
     }
 }
 

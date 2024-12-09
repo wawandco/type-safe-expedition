@@ -18,6 +18,9 @@ activityCompose = "1.9.3"
 composeBom = "2024.11.00"
 mapsCompose = "6.2.1"
 
+# Maps SDK
+playServicesMap = "19.0.0"
+
 # Navigation Compose
 navigationCompose = "2.8.4"
 
@@ -73,6 +76,9 @@ coil = "3.0.3"
 secretsGradlePlugin = "2.0.1"
 =======
 >>>>>>> dedcd6f (updating dependencies version and adding map-compose)
+
+# Secrets Gradle Plugin
+secretsGradlePlugin = "2.0.1"
 
 [libraries]
 androidx-core = { group = "androidx.core", name = "core", version.ref = "coreVersion" }

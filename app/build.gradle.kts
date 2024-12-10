@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -22,6 +24,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Read secrets from secrets.properties
+        val secretProperties = Properties().apply {
+            val secretPropertiesFile = rootProject.file("secrets.properties")
+            if (secretPropertiesFile.exists()) {
+                load(secretPropertiesFile.inputStream())
+            }
+        }
+
+        buildConfigField(
+            "String",
+            "MAP_API_KEY",
+            secretProperties["mapApiKey"]?.let { "\"$it\"" } ?: "\"DEFAULT_KEY_IF_MISSING\""
+        )
     }
 
     buildTypes {

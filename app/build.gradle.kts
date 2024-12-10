@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,6 +9,7 @@ plugins {
     alias(libs.plugins.parcelize)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.secrets.gradle.plugin)
 }
 
 android {
@@ -21,6 +24,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Read secrets from secrets.properties
+        val secretProperties = Properties().apply {
+            val secretPropertiesFile = rootProject.file("secrets.properties")
+            if (secretPropertiesFile.exists()) {
+                load(secretPropertiesFile.inputStream())
+            }
+        }
+
+        buildConfigField(
+            "String",
+            "MAP_API_KEY",
+            secretProperties["mapApiKey"]?.let { "\"$it\"" } ?: "\"DEFAULT_KEY_IF_MISSING\""
+        )
     }
 
     buildTypes {
@@ -44,6 +61,14 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+
+    secrets {
+        // This production secrets file and going to contains real secrets
+        propertiesFileName = "secrets.properties"
+
+        defaultPropertiesFileName = "local.properties"
     }
 }
 
@@ -53,6 +78,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.maps.compose)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.compose.ui.google.fonts)
     implementation(libs.androidx.ui.graphics)
@@ -172,4 +198,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
     implementation(libs.coil.test)
+
+    /* *****************************************************
+     **** Maps SDK
+    ****************************************************** */
+    implementation(libs.play.services.map)
 }

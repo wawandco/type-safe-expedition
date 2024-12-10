@@ -28,7 +28,7 @@ jobs:
       - name: Loan Maps ApiKey
         run: |
           echo "my maps api key is: ${{ secrets.MAPS_API_KEY }}"
-          echo -e "\nmapApiKey=\"$MAPS_API_KEY\"" >> ./local.properties
+          echo -e "\nmapApiKey=\"$MAPS_API_KEY\"" >> ./secrets.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew

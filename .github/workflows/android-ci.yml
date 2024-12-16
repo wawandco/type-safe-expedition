@@ -34,6 +34,11 @@ jobs:
         run: |
           sed "s|mapApiKey|$MAPS_API_KEY|g;" secrets.properties > local.properties
 
+      - name: Debug properties file
+        run: |
+          cat secrets.properties
+          cat local.properties
+
       - name: Generate Test Build
         run: ./gradlew assembleDebug
 

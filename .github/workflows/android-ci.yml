@@ -26,9 +26,10 @@ jobs:
           echo ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > app/google-services.json
 
       - name: Loan Maps ApiKey
+        env:
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
         run: |
-          echo "my maps api key is: ${{ secrets.MAPS_API_KEY }}"
-          echo -e "\nmapApiKey=\"$MAPS_API_KEY\"" >> ./local.properties
+          sed "s|mapApiKey|MAPS_API_KEY|g;" secrets.properties > local.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew

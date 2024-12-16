@@ -33,7 +33,6 @@ jobs:
           MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
         run: |
           sed "s|ApiMapKey=.*|ApiMapKey=$MAPS_API_KEY|" secrets.properties > local.properties
-          sed "s|ApiMapKey2=.*|ApiMapKey2=$MAPS_API_KEY|" secrets.properties > local.properties
 
       - name: Debug properties file
         run: |

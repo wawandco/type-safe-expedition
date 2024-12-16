@@ -74,7 +74,7 @@ fun AuthorList(authors: List<Author>) {
                                 painter = painterResource(R.drawable.taunt),
                                 contentDescription = authors[index].name,
                                 contentScale = ContentScale.Crop,
-                                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.scrim)
+                                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onBackground)
                             )
 
                             Column(

@@ -182,3 +182,4 @@ secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secret
 
 [bundles]
 testing = ["junit", "junitKtx", "kotlinx-coroutines-test", "robolectric", "mockito-kotlin", "mockwebserver"]
+

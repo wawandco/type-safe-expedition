@@ -70,12 +70,6 @@ firebaseAnalytics = "22.1.2"
 
 #Coil
 coil = "3.0.3"
-<<<<<<< HEAD
-
-# Secrets Gradle Plugin
-secretsGradlePlugin = "2.0.1"
-=======
->>>>>>> dedcd6f (updating dependencies version and adding map-compose)
 
 # Secrets Gradle Plugin
 secretsGradlePlugin = "2.0.1"
@@ -188,3 +182,4 @@ secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secret
 
 [bundles]
 testing = ["junit", "junitKtx", "kotlinx-coroutines-test", "robolectric", "mockito-kotlin", "mockwebserver"]
+

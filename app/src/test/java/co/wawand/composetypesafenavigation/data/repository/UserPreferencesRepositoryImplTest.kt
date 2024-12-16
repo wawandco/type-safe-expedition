@@ -21,6 +21,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.any
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+
 @RunWith(MockitoJUnitRunner::class)
 class UserPreferencesRepositoryImplTest {
 

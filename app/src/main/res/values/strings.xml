@@ -16,6 +16,7 @@
     <string name="home_screen_posts_label">Posts</string>
     <string name="home_screen_albums_label">Albums</string>
     <string name="home_screen_authors_label">Authors</string>
+    <string name="home_screen_map_label">Map</string>
     <string name="home_screen_refresh_label">Refresh</string>
     <string name="home_screen_empty_list">There are no resources to show yet. Press the refresh button to get new ones.</string>
     <string name="home_screen_author_label">Author:</string>

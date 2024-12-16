@@ -63,13 +63,6 @@ android {
         compose = true
         buildConfig = true
     }
-
-    secrets {
-        // This production secrets file and going to contains real secrets
-        propertiesFileName = "secrets.properties"
-        defaultPropertiesFileName = "local.properties"
-
-    }
 }
 
 dependencies {

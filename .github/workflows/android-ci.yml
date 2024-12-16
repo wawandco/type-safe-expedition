@@ -25,14 +25,14 @@ jobs:
           echo "my google service secret is: ${{ secrets.GOOGLE_SERVICES_JSON }}"
           echo ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > app/google-services.json
 
-      - name: Loan Maps ApiKey
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Load Maps ApiKey
         env:
           MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
         run: |
-          sed "s|mapApiKey|MAPS_API_KEY|g;" secrets.properties > local.properties
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+          sed "s|mapApiKey|$MAPS_API_KEY|g;" secrets.properties > local.properties
 
       - name: Generate Test Build
         run: ./gradlew assembleDebug

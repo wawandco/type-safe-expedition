@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">ComposeType Safe Navigation</string>
+    <!--Libs - Alert-->
+    <string name="info_dialog_confirm_button_text">OK</string>
+    <string name="info_dialog_confirm_text_prefix">Oops!</string>
+
+    <!--Welcome Screen-->
+    <string name="welcome_screen_user_name_input_label">Your Name!</string>
+    <string name="welcome_screen_text_info">Let\'s introduce your name to customize the experience. Otherwise, just click on the button below to start as a guest.</string>
+    <string name="welcome_screen_guest_label">Guest</string>
+    <string name="welcome_screen_ok_label">Go!</string>
+    <string name="welcome_screen_min_name_length_error">The name must be at least %d characters long</string>
+
+    <!--Home Screen-->
+    <string name="home_screen_main_label">Home</string>
+    <string name="home_screen_posts_label">Posts</string>
+    <string name="home_screen_albums_label">Albums</string>
+    <string name="home_screen_authors_label">Authors</string>
+    <string name="home_screen_map_label">Map</string>
+    <string name="home_screen_refresh_label">Refresh</string>
+    <string name="home_screen_empty_list">There are no resources to show yet. Press the refresh button to get new ones.</string>
+    <string name="home_screen_author_label">Author:</string>
+    <string name="home_screen_author_email_label">Email:</string>
+    <string name="home_screen_unknown_label">Unknown</string>
+    <string name="home_screen_album_photo_number_label"># Photos:</string>
+
+    <!--Details Screen-->
+    <!--Posts-->
+    <string name="details_post_screen_main_label">Post Details</string>
+    <string name="details_post_screen_related_posts_label">Related Posts</string>
+
+    <!--Album-->
+    <string name="details_album_screen_main_label">Album Details</string>
+    <string name="details_album_screen_album_label">Album:</string>
+    <string name="details_album_screen_padding_label">padding</string>
+    <string name="details_album_screen_corner_label">corner</string>
+    <string name="details_album_screen_unable_load_photo">Unable to load photo</string>
+    <string name="details_album_screen_content_key">photo</string>
+
+    <string name="dismiss_label">Dismiss</string>
+    <string name="generic_error">Something went wrong</string>
+</resources>

@@ -12,7 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class PhotoDaoTest : BaseDatabaseTest<AppDatabase>() {
+class RemotePhotoDaoTest : BaseDatabaseTest<AppDatabase>() {
     private lateinit var photoDao: PhotoDao
 
     override fun getDatabaseClass(): Class<AppDatabase> = AppDatabase::class.java
@@ -37,7 +37,7 @@ class PhotoDaoTest : BaseDatabaseTest<AppDatabase>() {
         val photos = photoDao.getPhotos()
         assertEquals(1, photos.size)
 
-        val photoWithAlbumById = photoDao.getPhotoById(1)
+        val photoWithAlbumById = photoDao.getPhotoWithAlbumById(1)
         assertEquals(PhotoWithAlbum(photo, album), photoWithAlbumById)
         assertEquals(1L, photoWithAlbumById.photoEntity.id)
         assertEquals(album.id, photoWithAlbumById.albumEntity.id)

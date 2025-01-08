@@ -3,14 +3,14 @@ package co.wawand.composetypesafenavigation.domain.model
 import androidx.compose.runtime.Immutable
 
 @Immutable
-data class RemotePhoto(
+data class LocalPhoto(
     override val id: Long,
     override val title: String,
-    val thumbnailUrl: String,
-    val url: String,
-    val album: String,
+    val path: String,
+    val size: Long,
+    val lastModified: Long,
 ) : BasePhoto(
     id = id,
     title = title,
-    imageSource = ImageSource.Remote(thumbnailUrl, url)
+    imageSource = ImageSource.Local(path)
 )

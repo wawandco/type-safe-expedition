@@ -184,4 +184,14 @@ dependencies {
      **** Maps SDK
     ****************************************************** */
     implementation(libs.play.services.map)
+
+    /* *****************************************************
+     **** Accompanist Permissions
+    ****************************************************** */
+    implementation(libs.accompanist.permissions)
+
+    /* *****************************************************
+     **** CameraX
+    ****************************************************** */
+    implementation(libs.bundles.androidx.camera)
 }

@@ -9,6 +9,7 @@ import co.wawand.composetypesafenavigation.R
 import co.wawand.composetypesafenavigation.domain.model.TemporaryPhoto
 import co.wawand.composetypesafenavigation.presentation.navigation.NavigationEvent
 import co.wawand.composetypesafenavigation.presentation.screens.lib.camera.ImagePreview
+import java.io.File
 
 @Composable
 fun PhotoPreviewScreen(
@@ -28,15 +29,35 @@ fun PhotoPreviewScreen(
         }
     }
 
+    LaunchedEffect(state.navigation) {
+        when (state.navigation) {
+            is PhotoPreviewNavigation.NavigateToAddPhoto -> onNavigate(NavigationEvent.OnNavigateToAddPhoto)
+
+            is PhotoPreviewNavigation.NavigateToUserPhotos -> onNavigate(NavigationEvent.OnNavigateToUserPhotos)
+
+            PhotoPreviewNavigation.None -> {}
+        }
+    }
+
     ImagePreview(
         photo = TemporaryPhoto(uri = photoUri),
         isLoading = state.isLoading,
         error = state.error,
         clearError = { onEvent(PhotoPreviewScreenEvents.ClearError) },
-        onBackAction = { onNavigate(NavigationEvent.OnNavigateToUserPhotos) },
+        onCloseAction = {
+            onEvent(
+                PhotoPreviewScreenEvents.RemovePreviewAndRedirect(
+                    photoFilePreview = File(photoUri.path!!),
+                    navigateTo = PhotoPreviewNavigation.NavigateToUserPhotos
+                )
+            )
+        },
         leftSideButton = Pair(stringResource(id = R.string.user_photos_screen_retake_photo)) {
-            onNavigate(
-                NavigationEvent.OnNavigateToAddPhoto
+            onEvent(
+                PhotoPreviewScreenEvents.RemovePreviewAndRedirect(
+                    photoFilePreview = File(photoUri.path!!),
+                    navigateTo = PhotoPreviewNavigation.NavigateToAddPhoto
+                )
             )
         },
         rightSideButton = Pair(stringResource(id = R.string.user_photos_screen_confirm)) {

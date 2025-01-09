@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,6 +27,12 @@ class PhotoPreviewScreenViewModel @Inject constructor(
             is PhotoPreviewScreenEvents.LoadPhotoUri -> loadPhotoUri(events.uriString)
             is PhotoPreviewScreenEvents.OnPersistUserPhoto -> persistPhoto()
             is PhotoPreviewScreenEvents.ClearError -> clearError()
+            is PhotoPreviewScreenEvents.RemovePreviewAndRedirect -> {
+                redirect(
+                    deleteResult = deletePreview(photoFile = events.photoFilePreview),
+                    navigateTo = events.navigateTo
+                )
+            }
         }
     }
 
@@ -75,6 +82,24 @@ class PhotoPreviewScreenViewModel @Inject constructor(
     private fun clearError() {
         viewModelState.update {
             it.copy(error = UiText.DynamicString(""))
+        }
+    }
+
+    private fun deletePreview(photoFile: File): Boolean {
+        return if (photoFile.exists() && !photoFile.isDirectory) {
+            photoFile.delete()
+        } else false
+    }
+
+    private fun redirect(deleteResult: Boolean, navigateTo: PhotoPreviewNavigation) {
+        if (deleteResult) {
+            viewModelState.update {
+                it.copy(navigation = navigateTo)
+            }
+        } else {
+            viewModelState.update {
+                it.copy(error = UiText.DynamicString(GENERIC_ERROR))
+            }
         }
     }
 }

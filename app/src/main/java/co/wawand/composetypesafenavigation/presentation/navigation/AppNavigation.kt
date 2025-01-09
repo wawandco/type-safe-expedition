@@ -8,6 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import co.wawand.composetypesafenavigation.presentation.screens.add_photo.AddPhotoScreen
+import co.wawand.composetypesafenavigation.presentation.screens.add_photo.AddPhotoScreenViewModel
 import co.wawand.composetypesafenavigation.presentation.screens.details.album.AlbumDetailsScreen
 import co.wawand.composetypesafenavigation.presentation.screens.details.album.AlbumDetailsScreenViewModel
 import co.wawand.composetypesafenavigation.presentation.screens.details.post.PostDetailsScreen
@@ -15,6 +17,10 @@ import co.wawand.composetypesafenavigation.presentation.screens.details.post.Pos
 import co.wawand.composetypesafenavigation.presentation.screens.home.HomeScreen
 import co.wawand.composetypesafenavigation.presentation.screens.home.HomeScreenViewModel
 import co.wawand.composetypesafenavigation.presentation.screens.lib.loading.ScreenLoading
+import co.wawand.composetypesafenavigation.presentation.screens.photo_preview.PhotoPreviewScreen
+import co.wawand.composetypesafenavigation.presentation.screens.photo_preview.PhotoPreviewScreenViewModel
+import co.wawand.composetypesafenavigation.presentation.screens.user_photos.UserPhotosScreen
+import co.wawand.composetypesafenavigation.presentation.screens.user_photos.UserPhotosScreenViewModel
 import co.wawand.composetypesafenavigation.presentation.screens.welcome.WelcomeScreen
 import co.wawand.composetypesafenavigation.presentation.screens.welcome.WelcomeScreenViewModel
 
@@ -70,6 +76,39 @@ fun AppNavigation(navController: NavHostController, appState: AppState) {
                 state = state
             )
         }
+
+        composable<AppDestinations.UserPhotos> {
+            val userPhotosScreenViewModel = hiltViewModel<UserPhotosScreenViewModel>()
+            val state by userPhotosScreenViewModel.uiState.collectAsState()
+            UserPhotosScreen(
+                onNavigate = { event -> handleNavigationEvent(navController, event) },
+                onEvent = { event -> userPhotosScreenViewModel.onEvent(event) },
+                state = state
+            )
+        }
+
+        composable<AppDestinations.AddPhoto> {
+            val addPhotoScreenViewModel = hiltViewModel<AddPhotoScreenViewModel>()
+            val state by addPhotoScreenViewModel.uiState.collectAsState()
+            AddPhotoScreen(
+                onNavigate = { event -> handleNavigationEvent(navController, event) },
+                onEvent = { event -> addPhotoScreenViewModel.onEvent(event) },
+                state = state
+            )
+        }
+
+        composable<AppDestinations.PhotoPreview> { navBackStackEntry ->
+            val photoPreview = navBackStackEntry.toRoute<AppDestinations.PhotoPreview>()
+            val photoPreviewScreenViewModel = hiltViewModel<PhotoPreviewScreenViewModel>()
+            val state by photoPreviewScreenViewModel.uiState.collectAsState()
+            PhotoPreviewScreen(
+                uriString = photoPreview.photoUri,
+                onNavigate = { event -> handleNavigationEvent(navController, event) },
+                onEvent = { event -> photoPreviewScreenViewModel.onEvent(event) },
+                state = state
+            )
+        }
+
     }
 }
 

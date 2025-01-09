@@ -2,11 +2,15 @@ package co.wawand.composetypesafenavigation.di
 
 import co.wawand.composetypesafenavigation.data.repository.AlbumRepositoryImpl
 import co.wawand.composetypesafenavigation.data.repository.AuthorRepositoryImpl
+import co.wawand.composetypesafenavigation.data.repository.CameraRepositoryImpl
+import co.wawand.composetypesafenavigation.data.repository.PhotoRepositoryImpl
 import co.wawand.composetypesafenavigation.data.repository.PostRepositoryImpl
 import co.wawand.composetypesafenavigation.data.repository.UserPreferencesRepositoryImpl
 import co.wawand.composetypesafenavigation.data.repository.UserRepositoryImpl
 import co.wawand.composetypesafenavigation.domain.repository.AlbumRepository
 import co.wawand.composetypesafenavigation.domain.repository.AuthorRepository
+import co.wawand.composetypesafenavigation.domain.repository.CameraRepository
+import co.wawand.composetypesafenavigation.domain.repository.PhotoRepository
 import co.wawand.composetypesafenavigation.domain.repository.PostRepository
 import co.wawand.composetypesafenavigation.domain.repository.UserPreferencesRepository
 import co.wawand.composetypesafenavigation.domain.repository.UserRepository
@@ -42,4 +46,11 @@ abstract class RepositoryModule {
     @Singleton
     abstract fun bindAuthorRepository(authorRepositoryImpl: AuthorRepositoryImpl): AuthorRepository
 
+    @Binds
+    @Singleton
+    abstract fun bindPhotoRepository(photoRepositoryImpl: PhotoRepositoryImpl): PhotoRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCameraRepository(cameraRepositoryImpl: CameraRepositoryImpl): CameraRepository
 }

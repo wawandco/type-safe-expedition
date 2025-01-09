@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.wawand.composetypesafenavigation.core.Constant.GENERIC_ERROR
 import co.wawand.composetypesafenavigation.core.util.Resource
-import co.wawand.composetypesafenavigation.domain.model.Photo
+import co.wawand.composetypesafenavigation.domain.model.BasePhoto
+import co.wawand.composetypesafenavigation.domain.model.RemotePhoto
+import co.wawand.composetypesafenavigation.domain.usecase.DeletePhotosUseCase
 import co.wawand.composetypesafenavigation.domain.usecase.GetAlbumDetailsUseCase
 import co.wawand.composetypesafenavigation.presentation.screens.lib.text.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlbumDetailsScreenViewModel @Inject constructor(
-    private val getAlbumDetailsUseCase: GetAlbumDetailsUseCase
+    private val getAlbumDetailsUseCase: GetAlbumDetailsUseCase,
+    private val deletePhotosUseCase: DeletePhotosUseCase
 ) : ViewModel() {
 
     private val viewModelState = MutableStateFlow(AlbumDetailsScreenState())
@@ -28,6 +31,11 @@ class AlbumDetailsScreenViewModel @Inject constructor(
             is AlbumDetailsScreenEvents.LoadAlbumDetails -> getAlbumDetails(event.albumId)
             is AlbumDetailsScreenEvents.OnPhotoClicked -> onPhotoClicked(event.photo)
             is AlbumDetailsScreenEvents.OnDismissPhotoDialog -> onDismissPhotoDialog()
+            is AlbumDetailsScreenEvents.UpdatePhotoSelection -> updatePhotoSelection(event.selectedIds)
+            is AlbumDetailsScreenEvents.OnDeleteClicked -> deletePhotos(
+                event.photosId,
+                event.albumId
+            )
         }
     }
 
@@ -56,7 +64,7 @@ class AlbumDetailsScreenViewModel @Inject constructor(
         }
     }
 
-    private fun onPhotoClicked(photo: Photo) {
+    private fun onPhotoClicked(photo: BasePhoto) {
         viewModelState.update {
             it.copy(
                 selectedPhoto = photo
@@ -69,6 +77,40 @@ class AlbumDetailsScreenViewModel @Inject constructor(
             it.copy(
                 selectedPhoto = null
             )
+        }
+    }
+
+    private fun updatePhotoSelection(selectedIds: Set<Long>) {
+        viewModelState.update {
+            it.copy(
+                selectedIds = selectedIds
+            )
+        }
+    }
+
+    private fun deletePhotos(selectedIds: Set<Long>, albumId: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            deletePhotosUseCase.invoke(selectedIds).collect { result ->
+                when (result) {
+                    is Resource.Loading -> viewModelState.update { it.copy(isLoading = true) }
+                    is Resource.Error -> viewModelState.update {
+                        it.copy(
+                            isLoading = false,
+                            error = UiText.DynamicString(result.message ?: GENERIC_ERROR),
+                        )
+                    }
+
+                    is Resource.Success -> {
+                        viewModelState.update {
+                            it.copy(
+                                isLoading = false,
+                                selectedIds = emptySet()
+                            )
+                        }
+                        getAlbumDetails(albumId)
+                    }
+                }
+            }
         }
     }
 }

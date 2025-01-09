@@ -37,6 +37,13 @@
     <string name="details_album_screen_unable_load_photo">Unable to load photo</string>
     <string name="details_album_screen_content_key">photo</string>
 
+    <!--User Photos-->
+    <string name="user_photos_screen_main_label">User Photos</string>
+    <string name="user_photos_screen_retake_photo">Retake</string>
+    <string name="user_photos_screen_confirm">Confirm</string>
+    <string name="user_photos_screen_no_photos_to_show">There are no photos to show.</string>
+    <string name="user_photos_screen_camera_permission_error">Camera permission is required to use this feature.</string>
+
     <string name="dismiss_label">Dismiss</string>
     <string name="generic_error">Something went wrong</string>
 </resources>

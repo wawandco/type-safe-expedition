@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import co.wawand.composetypesafenavigation.core.Constant.GENERIC_ERROR
 import co.wawand.composetypesafenavigation.core.util.Resource
 import co.wawand.composetypesafenavigation.domain.model.AlbumWithPhotos
-import co.wawand.composetypesafenavigation.domain.model.Photo
+import co.wawand.composetypesafenavigation.domain.model.RemotePhoto
 import co.wawand.composetypesafenavigation.domain.repository.AlbumRepository
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.toList
@@ -46,14 +46,14 @@ class GetAlbumDetailsUseCaseTest {
             title = "Album Title",
             owner = null,
             photos = listOf(
-                Photo(
+                RemotePhoto(
                     id = 1L,
                     title = "Photo Title",
                     thumbnailUrl = "https://example.com/thumbnail.jpg",
                     url = "https://example.com/photo.jpg",
                     album = albumId.toString(),
                 ),
-                Photo(
+                RemotePhoto(
                     id = 2L,
                     title = "Photo Title",
                     thumbnailUrl = "https://example.com/thumbnail.jpg",

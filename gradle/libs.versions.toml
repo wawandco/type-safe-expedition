@@ -74,6 +74,12 @@ coil = "3.0.3"
 # Secrets Gradle Plugin
 secretsGradlePlugin = "2.0.1"
 
+# Accompanist Permissions
+accompanistPermissions = "0.37.0"
+
+# Camera Core
+cameraCore = "1.4.1"
+
 [libraries]
 androidx-core = { group = "androidx.core", name = "core", version.ref = "coreVersion" }
 androidx-coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "coreVersion" }
@@ -166,6 +172,15 @@ coil-test = { group = "io.coil-kt.coil3", name = "coil-test", version.ref = "coi
 # Maps SDK
 play-services-map = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMap" }
 
+# Accompanist Permissions
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+
+# Camera Core
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCore" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraCore" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraCore" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraCore" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -182,4 +197,5 @@ secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secret
 
 [bundles]
 testing = ["junit", "junitKtx", "kotlinx-coroutines-test", "robolectric", "mockito-kotlin", "mockwebserver"]
+androidx-camera = ["androidx-camera-core", "androidx-camera-camera2", "androidx-camera-lifecycle", "androidx-camera-view"]
 

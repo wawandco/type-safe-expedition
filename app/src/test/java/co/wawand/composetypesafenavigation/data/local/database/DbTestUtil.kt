@@ -3,6 +3,7 @@ package co.wawand.composetypesafenavigation.data.local.database
 import co.wawand.composetypesafenavigation.data.local.database.entity.AlbumEntity
 import co.wawand.composetypesafenavigation.data.local.database.entity.AuthorEntity
 import co.wawand.composetypesafenavigation.data.local.database.entity.PhotoEntity
+import co.wawand.composetypesafenavigation.data.local.database.entity.PhotoType
 import co.wawand.composetypesafenavigation.data.local.database.entity.PostEntity
 
 object DbTestUtil {
@@ -37,6 +38,7 @@ object DbTestUtil {
     ) = PhotoEntity(
         id = id,
         title = title,
+        type = PhotoType.REMOTE,
         url = url,
         thumbnailUrl = thumbnailUrl,
         albumId = albumId

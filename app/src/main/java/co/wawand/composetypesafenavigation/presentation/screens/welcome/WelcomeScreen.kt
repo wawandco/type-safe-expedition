@@ -57,7 +57,7 @@ fun WelcomeScreen(
 
     if (state.success) {
         LaunchedEffect(Unit) {
-            onNavigate(NavigationEvent.NavigateToHome)
+            onNavigate(NavigationEvent.OnNavigateToHome)
         }
     }
 

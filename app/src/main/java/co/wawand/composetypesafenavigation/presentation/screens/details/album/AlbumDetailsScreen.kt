@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.wawand.composetypesafenavigation.R
 import co.wawand.composetypesafenavigation.presentation.navigation.NavigationEvent
+import co.wawand.composetypesafenavigation.presentation.screens.lib.grid.PhotosGrid
 import co.wawand.composetypesafenavigation.presentation.screens.lib.layout.AppLayout
 import co.wawand.composetypesafenavigation.presentation.screens.lib.layout.NavigationConfiguration
 import co.wawand.composetypesafenavigation.presentation.screens.lib.loading.ResourceLoading
@@ -50,7 +54,16 @@ fun AlbumDetailsScreen(
         navigationConfiguration = NavigationConfiguration(
             onClick = { onNavigate(NavigationEvent.OnNavigateUp) },
             icon = Icons.AutoMirrored.Filled.ArrowBack
-        )
+        ),
+        floatingActionButton = {
+            if (state.selectedIds.isNotEmpty()) {
+                FloatingActionButton(onClick = {
+                    onEvent(AlbumDetailsScreenEvents.OnDeleteClicked(state.selectedIds, albumId))
+                }) {
+                    Icon(imageVector = Icons.Default.Delete, contentDescription = null)
+                }
+            }
+        }
     ) {
         if (state.isLoading) {
             ResourceLoading()
@@ -112,6 +125,10 @@ fun AlbumDetailsScreen(
                 }
                 PhotosGrid(
                     photos = state.album?.photos ?: emptyList(),
+                    selectedIds = state.selectedIds,
+                    onSelectionChanged = {
+                        onEvent(AlbumDetailsScreenEvents.UpdatePhotoSelection(it))
+                    },
                     onPhotoClicked = { photo ->
                         onEvent(AlbumDetailsScreenEvents.OnPhotoClicked(photo))
                     }

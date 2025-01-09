@@ -17,4 +17,13 @@ sealed class AppDestinations {
 
     @Serializable
     data class AlbumDetails(val albumId: Long) : AppDestinations()
+
+    @Serializable
+    data object UserPhotos : AppDestinations()
+
+    @Serializable
+    data object AddPhoto : AppDestinations()
+
+    @Serializable
+    data class PhotoPreview(val photoUri: String) : AppDestinations()
 }

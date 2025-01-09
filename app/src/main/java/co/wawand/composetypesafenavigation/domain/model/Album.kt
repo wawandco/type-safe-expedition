@@ -15,5 +15,5 @@ data class AlbumWithPhotos(
     val id: Long,
     val title: String,
     val owner: Author?,
-    val photos: List<Photo>,
+    val photos: List<BasePhoto>,
 )

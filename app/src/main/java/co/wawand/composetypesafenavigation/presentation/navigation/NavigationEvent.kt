@@ -4,9 +4,12 @@ import androidx.navigation.NavHostController
 
 sealed class NavigationEvent {
     data object OnNavigateUp : NavigationEvent()
-    data object NavigateToHome : NavigationEvent()
+    data object OnNavigateToHome : NavigationEvent()
     data class OnNavigateToPostDetails(val postId: Long) : NavigationEvent()
     data class OnNavigateToAlbumDetails(val albumId: Long) : NavigationEvent()
+    data object OnNavigateToUserPhotos : NavigationEvent()
+    data object OnNavigateToAddPhoto : NavigationEvent()
+    data class OnNavigateToPhotoPreview(val photoUri: String) : NavigationEvent()
 }
 
 fun handleNavigationEvent(navController: NavHostController, event: NavigationEvent) {
@@ -14,7 +17,7 @@ fun handleNavigationEvent(navController: NavHostController, event: NavigationEve
 
         is NavigationEvent.OnNavigateUp -> navController.navigateUp()
 
-        is NavigationEvent.NavigateToHome -> navController.navigate(AppDestinations.Home) {
+        is NavigationEvent.OnNavigateToHome -> navController.navigate(AppDestinations.Home) {
             popUpTo(navController.graph.startDestinationId) { inclusive = true }
         }
 
@@ -25,5 +28,14 @@ fun handleNavigationEvent(navController: NavHostController, event: NavigationEve
         is NavigationEvent.OnNavigateToAlbumDetails -> navController.navigate(
             AppDestinations.AlbumDetails(event.albumId)
         )
+
+        is NavigationEvent.OnNavigateToUserPhotos -> navController.navigate(AppDestinations.UserPhotos)
+
+        is NavigationEvent.OnNavigateToAddPhoto -> navController.navigate(AppDestinations.AddPhoto)
+
+        is NavigationEvent.OnNavigateToPhotoPreview -> navController.navigate(
+            AppDestinations.PhotoPreview(event.photoUri)
+        )
+
     }
 }

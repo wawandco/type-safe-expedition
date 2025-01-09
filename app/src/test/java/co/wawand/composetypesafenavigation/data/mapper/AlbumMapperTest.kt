@@ -4,6 +4,7 @@ import co.wawand.composetypesafenavigation.data.local.database.entity.AlbumEntit
 import co.wawand.composetypesafenavigation.data.local.database.entity.AlbumWithPhotosAndOwner
 import co.wawand.composetypesafenavigation.data.local.database.entity.AuthorEntity
 import co.wawand.composetypesafenavigation.data.local.database.entity.PhotoEntity
+import co.wawand.composetypesafenavigation.data.local.database.entity.PhotoType
 import co.wawand.composetypesafenavigation.data.remote.api.entity.AlbumAPIEntity
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -47,6 +48,7 @@ class AlbumMapperTest {
             PhotoEntity(
                 id = 1,
                 title = "photo1",
+                type = PhotoType.REMOTE,
                 thumbnailUrl = "http://example.com/photo1",
                 url = "http://example.com/photo1",
                 albumId = albumEntity.id
@@ -54,6 +56,7 @@ class AlbumMapperTest {
             PhotoEntity(
                 id = 2,
                 title = "photo2",
+                type = PhotoType.REMOTE,
                 thumbnailUrl = "http://example.com/photo2",
                 url = "http://example.com/photo2",
                 albumId = albumEntity.id
@@ -95,6 +98,7 @@ class AlbumMapperTest {
             PhotoEntity(
                 id = 1,
                 title = "photo1",
+                type = PhotoType.REMOTE,
                 thumbnailUrl = "http://example.com/photo1",
                 url = "http://example.com/photo1",
                 albumId = albumEntity1.id
@@ -102,6 +106,7 @@ class AlbumMapperTest {
             PhotoEntity(
                 id = 2,
                 title = "photo2",
+                type = PhotoType.REMOTE,
                 thumbnailUrl = "http://example.com/photo2",
                 url = "http://example.com/photo2",
                 albumId = albumEntity1.id
@@ -128,6 +133,7 @@ class AlbumMapperTest {
             PhotoEntity(
                 id = 3,
                 title = "photo3",
+                type = PhotoType.REMOTE,
                 thumbnailUrl = "http://example.com/photo3",
                 url = "http://example.com/photo3",
                 albumId = albumEntity2.id
@@ -170,6 +176,7 @@ class AlbumMapperTest {
             PhotoEntity(
                 id = 1,
                 albumId = albumEntity.id,
+                type = PhotoType.REMOTE,
                 title = "Photo 1",
                 thumbnailUrl = "http://example.com/photo1",
                 url = "http://example.com/photo1"
@@ -177,6 +184,7 @@ class AlbumMapperTest {
             PhotoEntity(
                 id = 2,
                 albumId = albumEntity.id,
+                type = PhotoType.REMOTE,
                 title = "Photo 2",
                 thumbnailUrl = "http://example.com/photo2",
                 url = "http://example.com/photo2"

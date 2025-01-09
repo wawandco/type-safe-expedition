@@ -5,6 +5,7 @@ import co.wawand.composetypesafenavigation.core.util.Resource
 import co.wawand.composetypesafenavigation.data.local.database.dao.PhotoDao
 import co.wawand.composetypesafenavigation.data.local.database.entity.AlbumEntity
 import co.wawand.composetypesafenavigation.data.local.database.entity.PhotoEntity
+import co.wawand.composetypesafenavigation.data.local.database.entity.PhotoType
 import co.wawand.composetypesafenavigation.data.local.database.entity.PhotoWithAlbum
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
@@ -19,7 +20,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class PhotoRepositoryImplTest {
+class RemotePhotoRepositoryImplTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -42,6 +43,7 @@ class PhotoRepositoryImplTest {
             photoEntity = PhotoEntity(
                 id = photoId,
                 albumId = 1,
+                type = PhotoType.REMOTE,
                 title = "Test Photo",
                 url = "http://test.com/photo",
                 thumbnailUrl = "http://test.com/thumb"
@@ -50,10 +52,10 @@ class PhotoRepositoryImplTest {
             )
         )
 
-        `when`(photoDao.getPhotoById(photoId)).thenReturn(photoWithAlbum)
+        `when`(photoDao.getPhotoWithAlbumById(photoId)).thenReturn(photoWithAlbum)
 
         // Act
-        val results = repository.getPhotoDetails(photoId).toList()
+        val results = repository.getRemotePhotoDetails(photoId).toList()
 
         // Assert
         assertEquals(2, results.size)
@@ -68,10 +70,10 @@ class PhotoRepositoryImplTest {
     fun `getPhotoDetails handles database error`() = runTest {
         // Arrange
         val photoId = 1L
-        `when`(photoDao.getPhotoById(photoId)).thenThrow(RuntimeException("Database error"))
+        `when`(photoDao.getPhotoWithAlbumById(photoId)).thenThrow(RuntimeException("Database error"))
 
         // Act
-        val results = repository.getPhotoDetails(photoId).toList()
+        val results = repository.getRemotePhotoDetails(photoId).toList()
 
         // Assert
         assertEquals(2, results.size)

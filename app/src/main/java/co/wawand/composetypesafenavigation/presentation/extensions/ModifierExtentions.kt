@@ -14,7 +14,8 @@ import androidx.compose.ui.unit.toIntRect
 fun Modifier.photoGridDragHandler(
     lazyGridState: LazyGridState,
     haptics: HapticFeedback,
-    selectedIds: MutableState<Set<Long>>,
+    selectedIds: Set<Long>,
+    onSelectionChanged: (Set<Long>) -> Unit,
     autoScrollSpeed: MutableState<Float>,
     autoScrollThreshold: Float
 ) = pointerInput(Unit) {
@@ -32,11 +33,12 @@ fun Modifier.photoGridDragHandler(
     detectDragGesturesAfterLongPress(
         onDragStart = { offset ->
             lazyGridState.gridItemKeyAtPosition(offset)?.let { key ->
-                if (!selectedIds.value.contains(key)) {
+                if (!selectedIds.contains(key)) {
                     haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                     initialKey = key
                     currentKey = key
-                    selectedIds.value += key
+                    onSelectionChanged(selectedIds + key)
+                    //selectedIds.value += key
                 }
             }
         },
@@ -50,18 +52,22 @@ fun Modifier.photoGridDragHandler(
                 autoScrollSpeed.value = when {
                     distFromBottom < autoScrollThreshold ->
                         autoScrollThreshold - distFromBottom
+
                     distFromTop < autoScrollThreshold ->
                         -(autoScrollThreshold - distFromTop)
+
                     else -> 0f
                 }
 
                 lazyGridState.gridItemKeyAtPosition(change.position)?.let { key ->
                     if (currentKey != key) {
-                        selectedIds.value = selectedIds.value
+                        val newSelection = selectedIds
+                            //selectedIds.value = selectedIds.value
                             .minus(initialKey!!..currentKey!!)
                             .minus(currentKey!!..initialKey!!)
                             .plus(initialKey!!..key)
                             .plus(key..initialKey!!)
+                        onSelectionChanged(newSelection)
                         currentKey = key
                     }
                 }

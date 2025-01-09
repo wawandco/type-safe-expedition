@@ -2,6 +2,7 @@ package co.wawand.composetypesafenavigation.presentation.screens.home
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.sharp.Face
 import androidx.compose.material.icons.twotone.Build
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -26,8 +27,8 @@ fun HomeScreen(
 ) {
     AppLayout(
         titleResId = R.string.home_screen_main_label,
-        action = {},
-        iconVectorAction = Icons.TwoTone.Build,
+        action = { onNavigate(NavigationEvent.OnNavigateToUserPhotos) },
+        iconVectorAction = Icons.Sharp.Face,
         floatingActionButton = {
             FloatingActionButton(onClick = {
                 when (state.currentSection) {

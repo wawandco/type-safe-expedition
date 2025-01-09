@@ -19,7 +19,7 @@ import co.wawand.composetypesafenavigation.data.local.database.entity.UserEntity
         AuthorEntity::class,
         PostEntity::class,
         AlbumEntity::class,
-        PhotoEntity::class
+        PhotoEntity::class,
     ],
     version = 1,
     exportSchema = false,

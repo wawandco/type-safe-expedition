@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import co.wawand.composetypesafenavigation.core.Constant.GENERIC_ERROR
 import co.wawand.composetypesafenavigation.core.util.Resource
 import co.wawand.composetypesafenavigation.domain.model.BasePhoto
-import co.wawand.composetypesafenavigation.domain.model.RemotePhoto
 import co.wawand.composetypesafenavigation.domain.usecase.DeletePhotosUseCase
 import co.wawand.composetypesafenavigation.domain.usecase.GetAlbumDetailsUseCase
 import co.wawand.composetypesafenavigation.presentation.screens.lib.text.UiText
@@ -30,7 +29,7 @@ class AlbumDetailsScreenViewModel @Inject constructor(
         when (event) {
             is AlbumDetailsScreenEvents.LoadAlbumDetails -> getAlbumDetails(event.albumId)
             is AlbumDetailsScreenEvents.OnPhotoClicked -> onPhotoClicked(event.photo)
-            is AlbumDetailsScreenEvents.OnDismissPhotoDialog -> onDismissPhotoDialog()
+            is AlbumDetailsScreenEvents.OnHidePhotoPreview -> onDismissPhotoDialog()
             is AlbumDetailsScreenEvents.UpdatePhotoSelection -> updatePhotoSelection(event.selectedIds)
             is AlbumDetailsScreenEvents.OnDeleteClicked -> deletePhotos(
                 event.photosId,

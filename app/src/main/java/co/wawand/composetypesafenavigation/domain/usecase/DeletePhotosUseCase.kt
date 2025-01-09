@@ -13,11 +13,8 @@ class DeletePhotosUseCase @Inject constructor(
     operator fun invoke(photoIds: Set<Long>): Flow<Resource<Boolean>> = flow {
         emit(Resource.Loading())
 
-        println("photoIds $photoIds")
-
         runCatching {
             photoIds.forEach { photoId ->
-                println("photoId $photoId")
                 photoRepository.deleteUserPhoto(photoId).collect { result ->
                     when (result) {
                         is Resource.Loading -> emit(Resource.Loading())

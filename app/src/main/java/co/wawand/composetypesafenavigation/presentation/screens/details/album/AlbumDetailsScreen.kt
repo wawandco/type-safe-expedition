@@ -24,12 +24,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.PopupProperties
 import co.wawand.composetypesafenavigation.R
 import co.wawand.composetypesafenavigation.presentation.navigation.NavigationEvent
+import co.wawand.composetypesafenavigation.presentation.screens.lib.camera.ImagePreview
 import co.wawand.composetypesafenavigation.presentation.screens.lib.grid.PhotosGrid
 import co.wawand.composetypesafenavigation.presentation.screens.lib.layout.AppLayout
 import co.wawand.composetypesafenavigation.presentation.screens.lib.layout.NavigationConfiguration
 import co.wawand.composetypesafenavigation.presentation.screens.lib.loading.ResourceLoading
+import co.wawand.composetypesafenavigation.presentation.screens.lib.pop.AnimatedPopup
 import co.wawand.composetypesafenavigation.presentation.utils.mockdata.generateStaticAlbumWithPhotos
 import co.wawand.composetypesafenavigation.presentation.utils.mockdata.generateStaticPhotos
 import coil3.annotation.ExperimentalCoilApi
@@ -69,10 +72,20 @@ fun AlbumDetailsScreen(
             ResourceLoading()
         } else {
             if (state.selectedPhoto != null) {
-                ImageDetail(
-                    onDismissRequest = { onEvent(AlbumDetailsScreenEvents.OnDismissPhotoDialog) },
-                    photo = state.selectedPhoto
-                )
+                AnimatedPopup(
+                    onDismissRequest = { onEvent(AlbumDetailsScreenEvents.OnHidePhotoPreview) },
+                    properties = PopupProperties(
+                        focusable = true,
+                        dismissOnBackPress = true,
+                        dismissOnClickOutside = false,
+                        excludeFromSystemGesture = false,
+                    )
+                ) {
+                    ImagePreview(
+                        photo = state.selectedPhoto,
+                        onCloseAction = { onEvent(AlbumDetailsScreenEvents.OnHidePhotoPreview) }
+                    )
+                }
             }
 
             Column(

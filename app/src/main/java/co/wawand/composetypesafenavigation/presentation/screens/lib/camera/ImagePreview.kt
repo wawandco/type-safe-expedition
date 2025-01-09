@@ -24,7 +24,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -34,7 +33,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.wawand.composetypesafenavigation.R
 import co.wawand.composetypesafenavigation.core.Constant
@@ -55,9 +53,9 @@ fun ImagePreview(
     isLoading: Boolean = false,
     error: UiText = UiText.DynamicString(""),
     clearError: () -> Unit = {},
-    onBackAction: () -> Unit = {},
-    leftSideButton: Pair<String, () -> Unit> = Pair("") {},
-    rightSideButton: Pair<String, () -> Unit> = Pair("") {},
+    onCloseAction: () -> Unit = {},
+    leftSideButton: Pair<String, () -> Unit>? = null,
+    rightSideButton: Pair<String, () -> Unit>? = null,
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val context = LocalContext.current
@@ -95,7 +93,7 @@ fun ImagePreview(
                 contentColor = colorResource(R.color.pale_sky_blue),
                 containerColor = colorResource(R.color.charcoal_gray),
                 shape = RoundedCornerShape(10.dp),
-                onClick = onBackAction
+                onClick = onCloseAction
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.close),
@@ -111,7 +109,7 @@ fun ImagePreview(
                     is AsyncImagePainter.State.Empty -> {}
                     is AsyncImagePainter.State.Loading -> {
                         CircularProgressIndicator(
-                            modifier = Modifier.width(42.dp),
+                            modifier = Modifier.width(42.dp).align(Alignment.Center),
                             color = MaterialTheme.colorScheme.secondary,
                             trackColor = MaterialTheme.colorScheme.surfaceVariant,
                         )
@@ -180,36 +178,40 @@ fun ImagePreview(
                     .background(colorResource(id = R.color.charcoal_gray)),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                TextButton(
-                    modifier = Modifier.padding(
-                        top = (screenHeight * 0.02).dp, start = 18.dp
-                    ), colors = ButtonDefaults.buttonColors(
-                        contentColor = colorResource(id = R.color.soft_lavender_blue),
-                        containerColor = colorResource(
-                            id = R.color.charcoal_gray
+                leftSideButton?.let {
+                    TextButton(
+                        modifier = Modifier.padding(
+                            top = (screenHeight * 0.02).dp, start = 18.dp
+                        ), colors = ButtonDefaults.buttonColors(
+                            contentColor = colorResource(id = R.color.soft_lavender_blue),
+                            containerColor = colorResource(
+                                id = R.color.charcoal_gray
+                            )
+                        ), onClick = it.second
+                    ) {
+                        Text(
+                            text = it.first,
+                            style = MaterialTheme.typography.labelLarge
                         )
-                    ), onClick = leftSideButton.second
-                ) {
-                    Text(
-                        text = leftSideButton.first,
-                        style = MaterialTheme.typography.labelLarge
-                    )
+                    }
                 }
 
-                TextButton(
-                    modifier = Modifier.padding(top = (screenHeight * 0.02).dp, end = 18.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = colorResource(id = R.color.soft_lavender_blue),
-                        containerColor = colorResource(
-                            id = R.color.charcoal_gray
+                rightSideButton?.let {
+                    TextButton(
+                        modifier = Modifier.padding(top = (screenHeight * 0.02).dp, end = 18.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = colorResource(id = R.color.soft_lavender_blue),
+                            containerColor = colorResource(
+                                id = R.color.charcoal_gray
+                            )
+                        ),
+                        onClick = it.second
+                    ) {
+                        Text(
+                            text = it.first,
+                            style = MaterialTheme.typography.labelLarge
                         )
-                    ),
-                    onClick = rightSideButton.second
-                ) {
-                    Text(
-                        text = rightSideButton.first,
-                        style = MaterialTheme.typography.labelLarge
-                    )
+                    }
                 }
             }
         }

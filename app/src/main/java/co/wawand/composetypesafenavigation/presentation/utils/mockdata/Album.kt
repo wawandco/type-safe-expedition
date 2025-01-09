@@ -2,7 +2,7 @@ package co.wawand.composetypesafenavigation.presentation.utils.mockdata
 
 import co.wawand.composetypesafenavigation.domain.model.Album
 import co.wawand.composetypesafenavigation.domain.model.AlbumWithPhotos
-import co.wawand.composetypesafenavigation.domain.model.Photo
+import co.wawand.composetypesafenavigation.domain.model.RemotePhoto
 
 fun generateStaticAlbums(): List<Album> {
     val authors = generateStaticAuthors()
@@ -35,67 +35,67 @@ fun generateStaticAlbumWithPhotos(): AlbumWithPhotos = AlbumWithPhotos(
     owner = generateStaticAuthors()[0]
 )
 
-fun generateStaticPhotos(): List<Photo> {
+fun generateStaticPhotos(): List<RemotePhoto> {
     val albums = generateStaticAlbums()
 
     return listOf(
-        Photo(
+        RemotePhoto(
             id = 1,
             title = "Photo 1",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
             url = "https://picsum.photos/2400/1600?id=1",
             album = albums[0].title
         ),
-        Photo(
+        RemotePhoto(
             id = 2,
             title = "Photo 2",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
             url = "https://picsum.photos/2400/1600?id=2",
             album = albums[0].title
         ),
-        Photo(
+        RemotePhoto(
             id = 3,
             title = "Photo 3",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
             url = "https://picsum.photos/2400/1600?id=3",
             album = albums[0].title
         ),
-        Photo(
+        RemotePhoto(
             id = 4,
             title = "Photo 4",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
             url = "https://picsum.photos/2400/1600?id=4",
             album = albums[1].title
         ),
-        Photo(
+        RemotePhoto(
             id = 5,
             title = "Photo 5",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
             url = "https://picsum.photos/2400/1600?id=5",
             album = albums[1].title
         ),
-        Photo(
+        RemotePhoto(
             id = 6,
             title = "Photo 6",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
             url = "https://picsum.photos/2400/1600?id=6",
             album = albums[1].title
         ),
-        Photo(
+        RemotePhoto(
             id = 7,
             title = "Photo 7",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
             url = "https://picsum.photos/2400/1600?id=7",
             album = albums[2].title
         ),
-        Photo(
+        RemotePhoto(
             id = 8,
             title = "Photo 8",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
             url = "https://picsum.photos/2400/1600?id=8",
             album = albums[2].title
         ),
-        Photo(
+        RemotePhoto(
             id = 9,
             title = "Photo 8",
             thumbnailUrl = "https://picsum.photos/seed/${(0..100000).random()}/256/256",
